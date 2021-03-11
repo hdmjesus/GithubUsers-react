@@ -2,17 +2,20 @@ import React, { useState, useEffect } from "react";
 import UserList from "../componets/Home/UserList";
 import UserCard from "../componets/Home/UserCard";
 import Header from "../componets/Header/Header";
+import usersGithub from "../Hooks/useGlobalData";
 
-const Home = (props) => {
-  const [state, setstate] = useState(initialState);
+const Home = () => {
+  const [users, setUsers] = useState(null);
+  const API = usersGithub();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setUsers(API);
+    console.log(users);
+  }, [users, API]);
   return (
     <>
       <Header />
-      <UserList>
-        <UserCard />
-      </UserList>
+      <UserList></UserList>
     </>
   );
 };

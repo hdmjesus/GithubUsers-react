@@ -47,6 +47,7 @@ Remove the margin in all browsers.
 
 body {
   margin: 0;
+ background:#343650;
 }
 
 /**
@@ -181102,3 +181103,4 @@ video {
             animation: bounce 1s infinite;
   }
 }
+
