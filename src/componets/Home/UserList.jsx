@@ -13,8 +13,11 @@ const UserList = () => {
   const [users, setUsers] = useState();
   const [cantidad, setCantidad] = useState(0);
   const [page, setPage] = useState(INITIAL_PAGE);
-  const externalRef = useRef();
-  const { isNearScreen } = useNearScreen({ externalRef, once: false });
+  const externalRef = useRef(null);
+  const { isNearScreen } = useNearScreen({
+    externalRef: externalRef,
+    once: false,
+  });
 
   const handleNextPage = () => {
     setPage((prevPage) => prevPage + 1);
@@ -26,25 +29,23 @@ const UserList = () => {
 
   useEffect(() => {
     getUsuariosPage(page).then((data) =>
-      setUsers((prevData) => prevData.concat(data))
+      setUsers((prevData) => prevData && prevData.concat(data))
     );
   }, [page]);
 
   useEffect(() => {
     if (isNearScreen) {
       handleNextPage();
-      alert(isNearScreen);
     }
   }, [isNearScreen]);
 
   return (
     <section className="ListUsers flex flex-col  items-center w-full mb-10">
       <FIlterCategory filtrarCantidad={(value) => setCantidad(value)} />
-      <article className="ListUsers__list h-screen mt-5 flex flex-col items-center md:flex-row flex-wrap md:m-auto w-4/5 m-auto md:w-11/12 md:justify-center ">
-        {users && users.map((data) => <UserCard key={data.id} data={data} />)}
+      <article className="ListUsers__list  mt-5 flex flex-col items-center md:flex-row flex-wrap md:m-auto w-4/5 m-auto md:w-11/12 md:justify-center ">
+        {users &&
+          users.map((data, i) => <UserCard key={data.id} data={data} />)}
       </article>
-
-      <div id="visor" ref={externalRef}></div>
 
       {/* Paginacion manual  */}
       {/* <button
@@ -53,6 +54,7 @@ const UserList = () => {
       >
         Next
       </button> */}
+      <div className="w-5 h-5 mt-80" id="visor" ref={externalRef}></div>
     </section>
   );
 };
