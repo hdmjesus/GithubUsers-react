@@ -43,7 +43,7 @@ const RepositoriesDetail = (props) => {
         </p>
       </div>
       {ActivemModal === true && (
-        <Modal datos={props} closeModal={closeModal}></Modal>
+        <Modal {...props} closeModal={closeModal}></Modal>
       )}
     </li>
   );
