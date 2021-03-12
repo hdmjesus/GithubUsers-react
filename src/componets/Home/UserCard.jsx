@@ -2,7 +2,7 @@ import React from "react";
 
 const UserCard = ({ data }) => {
   const { login, id, avatar_url } = data;
-  console.log(data);
+
   return (
     <div className="ListUsers__card bg-white mt-5  rounded-md h-60 min-w-200 w-full md:w-40 max-w-xs md:mr-4">
       <figure className="w-full ">

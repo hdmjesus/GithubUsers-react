@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 
-const FIlterCategory = () => {
+const FIlterCategory = ({ filtrarCantidad }) => {
+  const cantidad = useRef(null);
+
+  const handleFilter = () => {
+    filtrarCantidad(cantidad.current.value);
+  };
+
   return (
     <div className=" flex p-5 flex-row-reverse">
-      <button className="ListUsers__filter w-20 p-3 bg-softRed rounded-sm mx-2 text-white">
+      <button
+        className="ListUsers__filter w-20 p-3 bg-softRed rounded-sm mx-2 text-white"
+        onClick={handleFilter}
+      >
         Filter
       </button>
       <input
+        ref={cantidad}
         className="w-4/12 rounded-sm p-3 text-xs"
         list="items"
         name="users"
@@ -18,9 +28,6 @@ const FIlterCategory = () => {
         <option>50</option>
         <option>100</option>
       </datalist>
-      <button className="bg-body mx-3 flex justify-center items-center p-2 w-20 rounded-md">
-        A-Z
-      </button>
     </div>
   );
 };

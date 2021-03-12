@@ -10,7 +10,6 @@ const Home = () => {
 
   useEffect(() => {
     setUsers(API);
-    console.log(users);
   }, [users, API]);
   return (
     <>
